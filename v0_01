@@ -1,0 +1,66 @@
+import os
+import WConio2 as WConio2
+import cursor
+
+os.system('cls')
+cursor.hide()
+
+voce = '(:^:)'  #personagem
+Pos_Y = 5   #linha
+Pos_X = 15  #coluna
+
+simbolo = ''
+
+contador = 0 #controla a velocidade de movimentos
+
+while(simbolo != 'o'):
+    #posicionar o cursor no começo da tela
+    WConio2.gotoxy(0,0)
+    
+    if Pos_Y > 49:
+        Pos_Y = 48
+    elif Pos_Y < 1:
+        Pos_Y = 2
+
+    if Pos_X > 99:
+        Pos_X = 98
+    elif Pos_X < 1:
+        Pos_X = 2
+
+    if contador % 100000 == 0:
+        #mexe voce
+        Pos_Y += 1
+
+    print('*' * 100)  #linha de cima
+    for i in range(50): #10 linhas
+        
+        print('*', end='')  #abre cada linha
+
+        for j in range(100): #23 colunas
+           
+            if i==Pos_Y and j==Pos_X:
+                print(voce, end='')
+            else:
+                 print(' ', end='')
+        
+        print('*')  #fecha cada linha 
+
+    print('*' * 100) #linha de baixo
+
+    contador += 0.1
+
+    #pegar interações do usuario
+    if WConio2.kbhit():
+        (tecla, simbolo) = WConio2.getch()
+        comando = simbolo
+        
+        if comando=='a' or comando=='A':
+            Pos_X -= 1
+        elif comando=='d' or comando=='D':
+            Pos_X += 1
+        elif comando=='w' or comando=='W':
+            Pos_Y -= 1
+        elif comando=='s' or comando=='S':
+            Pos_Y += 1
+
+print("Fim do Jogo!")
