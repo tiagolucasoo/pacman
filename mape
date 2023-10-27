@@ -1,0 +1,12 @@
+#Variaveis
+Vz = chr(0x0020) #Trocar por 0020 - Vazio |002A *
+
+Linha = Vz * 100
+Col = [Linha] * 40
+Col = '\n'.join(Col).split('\n') #String -> Lista de Strings
+
+print()
+
+for Linha in Col:
+    print(Linha)
+print()
