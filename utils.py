@@ -24,7 +24,7 @@ def infoAlunos():
     {uni} Bianca Milani
     {uni} Ana Beatriz
     {uni} Ágata Silverio
-    {uni} Nome Sobrenome""")
+    {uni} Vitor Sobrenome""")
 
 def apagarTerminal():
     os.system('cls')

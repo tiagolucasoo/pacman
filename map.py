@@ -7,9 +7,7 @@ import utils
 
 init(autoreset=True)
 
-
 def limpar_tela():
-    """Limpa a tela do terminal (funciona em Windows, Linux e Mac)."""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def desenhar_mapa(matriz, substituicoes, fantasmas):
@@ -38,7 +36,6 @@ def desenhar_mapa(matriz, substituicoes, fantasmas):
         
     print(mapa_para_imprimir, end="")
 
-# Coloque esta nova função junto com as outras funções auxiliares
 def encontrar_todas_posicoes(matriz, char):
     """Encontra todas as ocorrências de um caractere na matriz e retorna uma lista de coordenadas."""
     posicoes = []
@@ -50,15 +47,14 @@ def encontrar_todas_posicoes(matriz, char):
 
 # --- 2. CONFIGURAÇÃO INICIAL DO JOGO ---
 
-# Dicionário de substituições. Fica mais organizado que vários .replace()
 substituicoes_cores = {
     # Itens do cenário
-    '#': Back.RESET + Fore.BLUE + '\u2588',
+    '#': Back.RESET + Fore.YELLOW + '\u2588',
     '.': Back.RESET + Fore.WHITE + '.',
     '+': Back.RESET + Fore.YELLOW + '\u1A27',
-    '*': Back.WHITE + ' ', # O chão da casinha continua com fundo branco
+    '*': Back.WHITE + ' ',
 
-    # Fantasmas agora só definem a cor da frente e o caractere
+    # Fantasmas
     '8': Fore.RED + '\u03A9',
     '7': Fore.CYAN + '\u03A9',
     '6': Fore.GREEN + '\u03A9',
@@ -77,7 +73,7 @@ H #...##....##....###...##..##..##...###....##....##...#
 I #...##....##....###...##..##..##...###....##....##...#
 J ######.##.##.###.##.##############.##.###.##.##.######
 E #.........##.........................................#
-K #.......####...........###**###.........#....#.......#
+K #.......####...........#******#.........#....#.......#
 L #.......######.........#*8**7*#.........#....#.......#
 M #.......#....#.........#*6**5*#.........######.......#
 N #.......#....#.........########...........####.......#
@@ -107,7 +103,7 @@ for i, linha in enumerate(mapa_matriz):
         break
 
 fantasmas = []
-codigos_fantasmas = ['8', '7', '6', '5'] # Lista com o ID de cada fantasma
+codigos_fantasmas = ['8', '7', '6', '5']
 
 for codigo in codigos_fantasmas:
     posicoes = encontrar_todas_posicoes(mapa_matriz, codigo)
@@ -119,15 +115,12 @@ for codigo in codigos_fantasmas:
             'deixou_para_tras': '*' # Fantasmas começam em cima de '*'
         })
 
-# --- 3. O GAME LOOP ---
-
 while True:
     # Desenha o estado atual do mapa
     limpar_tela()
     utils.logo("PacMan Py")
     desenhar_mapa(mapa_matriz, substituicoes_cores, fantasmas)
 
-    # Pequena pausa para controlar a velocidade do jogo
     time.sleep(0.1)
 
     for fantasma in fantasmas:
@@ -146,7 +139,6 @@ while True:
     # Posição futura, começa igual à atual
     proximo_y, proximo_x = pacman_y, pacman_x
 
-    # --- 4. CAPTURA DE ENTRADA E LÓGICA DE MOVIMENTO ---
     if keyboard.is_pressed('up') or keyboard.is_pressed('w'):
         proximo_y -= 1
     elif keyboard.is_pressed('down') or keyboard.is_pressed('s'):
@@ -155,10 +147,8 @@ while True:
         proximo_x -= 1
     elif keyboard.is_pressed('right') or keyboard.is_pressed('d'):
         proximo_x += 1
-    elif keyboard.is_pressed('esc'): # Adiciona uma forma de sair do jogo
+    elif keyboard.is_pressed('esc'):
         break
-
-    # --- 5. ATUALIZAÇÃO DO MAPA ---
 
     # Verifica se a próxima posição é válida (não é uma parede '#')
     if mapa_matriz[proximo_y][proximo_x] != '#':

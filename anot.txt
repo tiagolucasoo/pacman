@@ -1,31 +1,24 @@
-#	strategy.py	#
-#	- Padrão strategy para as personalidades dos fantasmas
-#	- Blinky (Vermelho): Persegue o Pac-Man diretamente
-#	- Pinky (Rosa): Se posiciona na frente do Pac-Man
-#	- Inky (Ciano): Usa a posição do Blinky para cercar o Pac-Man
-#	- Clyde (Laranja): Persegue o Pac-Man sem chegar muito próximo
+1) Adicionar Nome, Crônometro, Dificuldade e Pontuação
+    # Funções em utils.py e em main.py e utilizando no game.py
 
+2) Adicionar comandos para menu com pausar, continuar, resetar ou mudar dificuldade(resetar tmb)
 
-#	states.py	#
-#	- Padrão state, os diferentes estados do jogo
-#	- MenuPrincipal
-#	- Jogando
-#	- Pausado
-#	- GameOver
-#	- Vitoria
+3) Adicionar transição de main para game
 
+4) Adicionar Comportamentos para cada fantasmas no strategy:
+    def fantasma_blinky():
+        #	- Blinky (Vermelho): Persegue o Pac-Man diretamente
+    def fantasma_pinky():
+        #	- Pinky (Rosa): Se posiciona na frente do Pac-Man
+    def fantasma_inky():
+        #	- Inky (Ciano): Usa a posição do Blinky para cercar o Pac-Man
+    def fantasma_clyde():
+        #	- Clyde (Laranja): Persegue o Pac-Man sem chegar muito próximo
 
-#	main.py		#
-#	- Tela inicial
+5) Adicionar Colisão com fantasmas e som de colisão com pygame
 
+6) Adicionar Vitoria e GameOver
 
-#	game.py		#
-#	- Tela principal do game
-
-
-#	map.py		#
-#	- Tela para desenhar o mapa e verificar colisões
-
-
-#	utils.py	#
-#	- Tela para utilidades, limpar tela, e afins...
+7) Adicionar as funções para aparecer a pílula
+    # Função para gerar a posição random dela a cada quanto tempo?
+    # Função para mudar os atributos dos fantasmas e pacman após a pilula
