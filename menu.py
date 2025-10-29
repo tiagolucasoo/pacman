@@ -1,5 +1,7 @@
 import time
 import sys
+import utils
+import keyboard
 
 def iniciar_jogo():
     print("Hora de começar a jogar!")
@@ -52,11 +54,23 @@ def continuar():
 
 def resetar():
     print("\nJogo resetado. Voltando ao início...") 
-
     iniciar_jogo()
 
-def mudar_dificuldade():
-    tipo_dificuldade = """
+def validacao_nome():
+    while True: 
+        usuario = input("Digite o seu nome de jogador(a): ")
+
+        if not usuario:
+            print("\nNenhum nome informado. Tente novamente.")
+
+        elif len(usuario) < 3:
+            print(f"\nO nome '{usuario}' é muito curto. Deve ter 3 ou mais caracteres.")
+        
+        else:
+            print(f"\nBem vindo(a) '{usuario}'! Iniciando o Pacman, aguarde e tenha um bom jogo!")
+            return usuario
+
+dificuldade_type = """
 ______ Nível de Dificuldade ______
 
 1. Fácil
@@ -64,6 +78,8 @@ ______ Nível de Dificuldade ______
 3. Difícil
 __________________________________
 """
+def mudar_dificuldade():
+    tipo_dificuldade = dificuldade_type
     print(tipo_dificuldade)
 
     while True:
@@ -75,7 +91,6 @@ __________________________________
             print(f'\nA dificuldade foi alterada para [{nomes_dificuldade[dificuldade - 1]}].')
             resetar()
             break
-
         else:
             print("Opção indisponível. Tente novamente...")
 

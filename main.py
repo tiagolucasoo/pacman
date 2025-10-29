@@ -1,20 +1,14 @@
 import utils as ut
+import menu
+import game
 
-ut.apagarTerminal()
+# Chama a função de Limpar 
+ut.limpar_tela()
 ut.logo("PacMan Py")
-
-ut.descricao2("Desenvolvido Por")
 ut.infoAlunos()
 
-name = input("""
-    Para começar informe o seu nome: """)
+usuario = menu.validacao_nome()
+dificuldade = ut.escolher_dificuldade()
 
-print("""\n
-    Dificuldade
-    [1] - Fácil
-    [2] - Normal
-    [3] - Díficil\n
-    """)
-
-difficulty =  input("""
-    Informe o n° da dificuldade escolhida: """)
+while True:
+    game.pacman(usuario, dificuldade)
