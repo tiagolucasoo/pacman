@@ -1,6 +1,6 @@
-import pyfiglet # type: ignore
-from pyfiglet import Figlet # type: ignore
-from colorama import Fore, Back, Style, init # type: ignore
+import pyfiglet 
+from pyfiglet import Figlet 
+from colorama import Fore, Back, Style, init 
 import os
 import time
 
@@ -114,3 +114,4 @@ if __name__ == "__main__":
     dificuldade = escolher_dificuldade()
     print(f"Sua dificuldade: {dificuldade}")
     loading("Iniciando o jogo")
+
