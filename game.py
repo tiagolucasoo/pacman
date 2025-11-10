@@ -6,6 +6,8 @@ import random
 import utils
 from map import mapa_original
 import menu
+import states
+import strategy
 
 def pacman(usuario, dificuldade):
     init(autoreset=True)
@@ -80,27 +82,57 @@ def pacman(usuario, dificuldade):
 
     inicio_tempo = utils.iniciar_cronometro()
     pontuacao = 0
+    alimentos_restantes = 0
+
+    for linha in mapa_matriz:
+        alimentos_restantes += linha.count('.')
+
+    if dificuldade == 'facil':
+        velocidade_jogo = 0.15
+    elif dificuldade == 'medio':
+        velocidade_jogo = 0.10
+    elif dificuldade == 'dificil':
+        velocidade_jogo = 0.05
+    else:
+        velocidade_jogo = 0.10
 
     while True:
         limpar_tela()
         utils.logo("PacMan Py")
-
-        print(f"Usuário: {usuario}")
-        print(f"Dificuldade: {dificuldade}\n\n")
-
         tempo = utils.tempo_passado(inicio_tempo)
-        print(f"Crônometro: {tempo}")
-        print(f"Pontuação: {pontuacao}")
+
+        print(f"Você está jogando no modo {dificuldade}")
+        print("Para acessar o Menu aperte a tecla ESC")
+
+        print(f"""Usuário: {usuario}          Tempo: {tempo}s         Pontuação: {pontuacao}
+        """)
 
         desenhar_mapa(mapa_matriz, substituicoes_cores, fantasmas)
 
-        time.sleep(0.05) # Fácil 0.15
+        time.sleep(velocidade_jogo)
 
         for fantasma in fantasmas:
-            # Define as possíveis direções (delta_y, delta_x)
-            movimentos_possiveis = [(-1, 0), (1, 0), (0, -1), (0, 1)] # Cima, Baixo, Esquerda, Direita
-            dy, dx = random.choice(movimentos_possiveis)
+            dy, dx = 0, 0
+            pacman_atual_y, pacman_atual_x = pacman_y, pacman_x
+
+            if fantasma['char'] == '8':
+                dy, dx = strategy.fantasma_blinky(mapa_matriz, fantasma, pacman_atual_y, pacman_atual_x)
+            
+            elif fantasma['char'] == '7':
+                dy, dx = strategy.fantasma_pinky(mapa_matriz, fantasma, pacman_atual_y, pacman_atual_x)
+
+            elif fantasma['char'] == '6':
+                dy, dx = strategy.fantasma_inky(mapa_matriz, fantasma, pacman_atual_y, pacman_atual_x)
+            
+            elif fantasma['char'] == '5':
+                dy, dx = strategy.fantasma_clyde(mapa_matriz, fantasma, pacman_atual_y, pacman_atual_x)
+
             proximo_y, proximo_x = fantasma['y'] + dy, fantasma['x'] + dx
+
+            # --- ADICIONE ESTA VERIFICAÇÃO ---
+            if proximo_y == pacman_y and proximo_x == pacman_x:
+                return ('game_over', pontuacao, tempo)
+            # --- FIM DA ADIÇÃO ---
 
             # Verifica se a próxima posição é válida (não é uma parede)
             if mapa_matriz[proximo_y][proximo_x] not in ['#', '8', '7', '6', '5']:
@@ -128,7 +160,7 @@ def pacman(usuario, dificuldade):
             if acao == 'continuar':
                 limpar_tela()
                 pass
-            
+
             elif acao == 'resetar':
                 return 'resetar'
             
@@ -139,9 +171,17 @@ def pacman(usuario, dificuldade):
         # Verifica se a próxima posição é válida (não é uma parede '#')
         if mapa_matriz[proximo_y][proximo_x] != '#':
 
-            alimentos = mapa_matriz[proximo_y][proximo_x]
-            if alimentos == '.':
+            destino = mapa_matriz[proximo_y][proximo_x]
+            if destino == '.':
                 pontuacao += 10
+                alimentos_restantes -= 1
+
+                if alimentos_restantes == 0:
+                    return ('vitoria', pontuacao, tempo)
+
+            if destino in ['8', '7', '6', '5']:
+                return ('game_over', pontuacao, tempo)
+            
 
             # Apaga o Pac-Man da posição antiga
             mapa_matriz[pacman_y][pacman_x] = ' '
