@@ -1,9 +1,7 @@
 import utils as ut
 import menu
 import game
-import states
 
-# Chama a função de Limpar 
 ut.limpar_tela()
 ut.logo("PacMan Py")
 ut.infoAlunos()
@@ -30,7 +28,7 @@ while True:
         tempo_jogado = jogo[2]
 
         ut.limpar_tela()
-        states.Game_Over()
+        menu.Game_Over()
         print(f"\n    Ops {usuario}, você perdeu!")
         print(f"    Pontuação Final: {pontuacao_final}")
         print(f"    Tempo: {tempo_jogado}s")
@@ -41,7 +39,7 @@ while True:
         tempo_jogado = jogo[2]
 
         ut.limpar_tela()
-        states.Vitoria()
+        menu.Vitoria()
         print(f"\n    PARABÉNS {usuario}, VOCÊ GANHOU!")
         print(f"    Pontuação Final: {pontuacao_final}")
         print(f"    Tempo: {tempo_jogado}s")

@@ -25,11 +25,6 @@ def movimento_aleatorio_valido(mapa, fantasma):
     return (0, 0) # Fica parado se estiver totalmente preso
 
 def movimento_base_perseguicao(mapa, fantasma, alvo_y, alvo_x):
-    """
-    Função base "Greedy" (fácil). Tenta se mover na direção do alvo.
-    Retorna (dy, dx)
-    """
-    
     # 1. Calcula a distância (direção)
     dist_y = alvo_y - fantasma['y']
     dist_x = alvo_x - fantasma['x']
@@ -69,25 +64,16 @@ def movimento_base_perseguicao(mapa, fantasma, alvo_y, alvo_x):
     # 4. Se ficou preso (ex: beco sem saída), faz um movimento aleatório válido
     return movimento_aleatorio_valido(mapa, fantasma)
 
-# --- Estratégias dos Fantasmas ---
-
 def fantasma_blinky(mapa, fantasma, pacman_y, pacman_x):
-    # - Blinky (Vermelho): Persegue o Pac-Man diretamente
     return movimento_base_perseguicao(mapa, fantasma, pacman_y, pacman_x)
 
 def fantasma_pinky(mapa, fantasma, pacman_y, pacman_x):
-    # - Pinky (Rosa): Tenta se posicionar na frente do Pac-Man
-    # (Versão fácil: mira 4 casas ACIMA do Pac-Man)
     return movimento_base_perseguicao(mapa, fantasma, pacman_y - 4, pacman_x)
 
 def fantasma_inky(mapa, fantasma, pacman_y, pacman_x):
-    # - Inky (Ciano): Tenta cercar o Pac-Man
-    # (Versão fácil: mira 4 casas ABAIXO do Pac-Man)
     return movimento_base_perseguicao(mapa, fantasma, pacman_y + 4, pacman_x)
 
 def fantasma_clyde(mapa, fantasma, pacman_y, pacman_x):
-    # - Clyde (Laranja): Persegue o Pac-Man, mas foge se chegar perto
-    
     # Calcula a distância
     distancia = abs(fantasma['y'] - pacman_y) + abs(fantasma['x'] - pacman_x)
     
@@ -96,6 +82,6 @@ def fantasma_clyde(mapa, fantasma, pacman_y, pacman_x):
         return movimento_base_perseguicao(mapa, fantasma, pacman_y, pacman_x)
     else:
         # Se perto, foge para o canto inferior esquerdo
-        alvo_fuga_y = len(mapa) - 2  # Canto inferior
-        alvo_fuga_x = 1             # Canto esquerdo
+        alvo_fuga_y = len(mapa) - 2
+        alvo_fuga_x = 1            
         return movimento_base_perseguicao(mapa, fantasma, alvo_fuga_y, alvo_fuga_x)

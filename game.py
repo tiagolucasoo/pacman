@@ -2,11 +2,9 @@ import os
 import time
 import keyboard
 from colorama import Fore, Back, Style, init
-import random
 import utils
 from map import mapa_original
 import menu
-import states
 import strategy
 
 def pacman(usuario, dificuldade):
@@ -189,5 +187,3 @@ def pacman(usuario, dificuldade):
             pacman_y, pacman_x = proximo_y, proximo_x
             # Coloca o Pac-Man na nova posição
             mapa_matriz[pacman_y][pacman_x] = '+'
-
-    print("Jogo finalizado!")
