@@ -3,6 +3,7 @@ from pyfiglet import Figlet
 from colorama import Fore, Back, Style, init 
 import os
 import time
+import menu
 
 #Inicializa o colorama para resetar as cores automaticamente
 init(autoreset=True)
@@ -55,11 +56,11 @@ def escolher_dificuldade() -> str:
 
     opcoes = {"1": "facil", "2": "medio", "3": "dificil"}
     while True:
-        print("Escolha a dificuldade:")
+        print("\nEscolha a dificuldade:")
         print("1. Fácil")
         print("2. Médio")
         print("3. Difícil")
-        escolha = input("Digite o número da dificuldade desejada: ")
+        escolha = input("\nDigite o número da dificuldade desejada: ")
         if escolha in opcoes:
             return opcoes[escolha]
         else:
@@ -84,11 +85,8 @@ def tempo_passado(inicio: float) -> float:
     
     return round(time.time() - inicio, 1)
 
-def limpar_tela() -> None:
-
-    """Limpa o terminal."""
-    
-    os.system('cls' if os.name == 'nt' else 'clear')
+def limpar_tela():
+    os.system('cls')
 
 #______________________________________________
 # FUNÇÕES OPCIONAIS
