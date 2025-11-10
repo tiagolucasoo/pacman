@@ -1,12 +1,11 @@
 import utilidades as ut
-import menu
 import game
 
 ut.limpar_tela()
 ut.logo("PacMan Py")
 ut.infoAlunos()
 
-usuario = menu.validacao_nome()
+usuario = ut.validacao_nome()
 dificuldade = ut.escolher_dificuldade()
 
 while True:
@@ -28,7 +27,7 @@ while True:
         tempo_jogado = jogo[2]
 
         ut.limpar_tela()
-        menu.Game_Over()
+        ut.Game_Over()
         print(f"\n    Ops {usuario}, você perdeu!")
         print(f"    Pontuação Final: {pontuacao_final}")
         print(f"    Tempo: {tempo_jogado}s")
@@ -39,7 +38,7 @@ while True:
         tempo_jogado = jogo[2]
 
         ut.limpar_tela()
-        menu.Vitoria()
+        ut.Vitoria()
         print(f"\n    PARABÉNS {usuario}, VOCÊ GANHOU!")
         print(f"    Pontuação Final: {pontuacao_final}")
         print(f"    Tempo: {tempo_jogado}s")

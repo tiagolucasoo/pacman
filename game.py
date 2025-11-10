@@ -3,8 +3,7 @@ import time
 import keyboard
 from colorama import Fore, Back, Style, init
 import utilidades
-from map import mapa_original
-import menu
+from utilidades import mapa_original
 import strategy
 
 def pacman(usuario, dificuldade):
@@ -154,7 +153,7 @@ def pacman(usuario, dificuldade):
             utilidades.limpar_tela()
             utilidades.logo("Jogo Pausado")
 
-            acao = menu.menu()
+            acao = utilidades.menu()
             if acao == 'continuar':
                 limpar_tela()
                 pass
