@@ -3,6 +3,9 @@ import sys
 import utils
 import keyboard
 
+dificuldade_mapa = {"1": "facil", "2": "medio", "3": "dificil"}
+dificuldade_view = {"1": "Fácil", "2": "Médio", "3": "Difícil"}
+
 def iniciar_jogo():
     print("Hora de começar a jogar!")
     time.sleep(1)
@@ -34,10 +37,22 @@ def menu():
     while True:
         escolha = input("Escolha uma opção do menu: ")
 
-        if escolha in opcoes_menu:
-
-            opcoes_menu[escolha]() 
-            break
+        if escolha == '1':
+            opcoes_menu[escolha]()
+            return 'continuar'
+        
+        elif escolha == '2':
+            return opcoes_menu[escolha]()
+        
+        elif escolha == '3':
+            return opcoes_menu[escolha]()
+        
+        elif escolha == '4':
+            return opcoes_menu[escolha]()
+        
+        elif escolha == '5':
+            opcoes_menu[escolha]()
+            print(menu_texto)
 
         else:
             print("Opção inválida. Tente novamente.")
@@ -46,15 +61,14 @@ def pausar():
     print("\nJogo pausado. Aperte ENTER para continuar...")
     input()
 
-    continuar()
-    fase_atual()
-
 def continuar():
     print("Retornando para fase... \n")
+    return 'continuar'
 
 def resetar():
     print("\nJogo resetado. Voltando ao início...") 
-    iniciar_jogo()
+    time.sleep(1)
+    return 'resetar'
 
 def validacao_nome():
     while True: 
@@ -86,11 +100,11 @@ def mudar_dificuldade():
         nivel = input("Informe o nº da dificuldade escolhida: ")
 
         if nivel in ['1', '2', '3']:
-            dificuldade = int(nivel)
-            nomes_dificuldade = ['Fácil', 'Médio', 'Difícil']
-            print(f'\nA dificuldade foi alterada para [{nomes_dificuldade[dificuldade - 1]}].')
-            resetar()
-            break
+            print(f"\nA dificuldade foi alterada para {dificuldade_view[nivel]}")
+            print("O jogo será resetado")
+            time.sleep(1.5)
+
+            return ('mudar', dificuldade_mapa[nivel])
         else:
             print("Opção indisponível. Tente novamente...")
 

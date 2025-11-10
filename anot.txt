@@ -19,6 +19,4 @@
 
 6) Adicionar Vitoria e GameOver
 
-7) Adicionar as funções para aparecer a pílula
-    # Função para gerar a posição random dela a cada quanto tempo?
-    # Função para mudar os atributos dos fantasmas e pacman após a pilula
+MAP: OK

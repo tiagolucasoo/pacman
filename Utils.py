@@ -5,24 +5,15 @@ import os
 import time
 import menu
 
-#Inicializa o colorama para resetar as cores automaticamente
 init(autoreset=True)
 
-# Inicializa o Figlet e obtém as fontes disponíveis
 f = Figlet()
 fontes = f.getFonts()
-uni = '\u1A27' #Caractere decorativo
+uni = '\u1A27'
 
-# _____________________________________________
-#  FUNÇÕES DE EXIBIÇÃO E ESTILOS DE TEXTO
-#______________________________________________
-
-def logo(texto: str, cor=Fore.YELLOW, fonte="slant") -> None:
-    
-    """"Exibe um logo em ASCII art com a fonte e cor especificadas."""
-    
-    ascii_art = pyfiglet.figlet_format(texto, font="slant")
-    print(cor + ascii_art + Fore.RESET)
+def logo(texto: str, cor=Fore.YELLOW):
+    ascii = pyfiglet.figlet_format(texto, font="slant")
+    print(cor + ascii + Fore.RESET)
 
 def descricao(texto: str, fonte="standard", cor=Fore.CYAN) -> None: 
     

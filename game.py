@@ -5,6 +5,7 @@ from colorama import Fore, Back, Style, init
 import random
 import utils
 from map import mapa_original
+import menu
 
 def pacman(usuario, dificuldade):
     init(autoreset=True)
@@ -77,11 +78,20 @@ def pacman(usuario, dificuldade):
                 'deixou_para_tras': '*'
             })
 
+    inicio_tempo = utils.iniciar_cronometro()
+    pontuacao = 0
+
     while True:
         limpar_tela()
         utils.logo("PacMan Py")
+
         print(f"Usuário: {usuario}")
         print(f"Dificuldade: {dificuldade}\n\n")
+
+        tempo = utils.tempo_passado(inicio_tempo)
+        print(f"Crônometro: {tempo}")
+        print(f"Pontuação: {pontuacao}")
+
         desenhar_mapa(mapa_matriz, substituicoes_cores, fantasmas)
 
         time.sleep(0.05) # Fácil 0.15
@@ -111,10 +121,28 @@ def pacman(usuario, dificuldade):
         elif keyboard.is_pressed('right') or keyboard.is_pressed('d'):
             proximo_x += 1
         elif keyboard.is_pressed('esc'):
-            break
+            utils.limpar_tela()
+            utils.logo("Jogo Pausado")
+
+            acao = menu.menu()
+            if acao == 'continuar':
+                limpar_tela()
+                pass
+            
+            elif acao == 'resetar':
+                return 'resetar'
+            
+            elif isinstance(acao, tuple) and acao[0] == 'mudar':
+                return acao
+
 
         # Verifica se a próxima posição é válida (não é uma parede '#')
         if mapa_matriz[proximo_y][proximo_x] != '#':
+
+            alimentos = mapa_matriz[proximo_y][proximo_x]
+            if alimentos == '.':
+                pontuacao += 10
+
             # Apaga o Pac-Man da posição antiga
             mapa_matriz[pacman_y][pacman_x] = ' '
             # Atualiza as coordenadas
