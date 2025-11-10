@@ -2,7 +2,7 @@ import os
 import time
 import keyboard
 from colorama import Fore, Back, Style, init
-import utils
+import utilidades
 from map import mapa_original
 import menu
 import strategy
@@ -78,7 +78,7 @@ def pacman(usuario, dificuldade):
                 'deixou_para_tras': '*'
             })
 
-    inicio_tempo = utils.iniciar_cronometro()
+    inicio_tempo = utilidades.iniciar_cronometro()
     pontuacao = 0
     alimentos_restantes = 0
 
@@ -96,13 +96,13 @@ def pacman(usuario, dificuldade):
 
     while True:
         limpar_tela()
-        utils.logo("PacMan Py")
-        tempo = utils.tempo_passado(inicio_tempo)
+        utilidades.logo("PacMan Py")
+        tempo = utilidades.tempo_passado(inicio_tempo)
 
         print(f"Você está jogando no modo {dificuldade}")
         print("Para acessar o Menu aperte a tecla ESC")
 
-        print(f"""Usuário: {usuario}          Tempo: {tempo}s         Pontuação: {pontuacao}
+        print(f"""\nUsuário: {usuario}          Tempo: {tempo}s         Pontuação: {pontuacao}
         """)
 
         desenhar_mapa(mapa_matriz, substituicoes_cores, fantasmas)
@@ -151,8 +151,8 @@ def pacman(usuario, dificuldade):
         elif keyboard.is_pressed('right') or keyboard.is_pressed('d'):
             proximo_x += 1
         elif keyboard.is_pressed('esc'):
-            utils.limpar_tela()
-            utils.logo("Jogo Pausado")
+            utilidades.limpar_tela()
+            utilidades.logo("Jogo Pausado")
 
             acao = menu.menu()
             if acao == 'continuar':

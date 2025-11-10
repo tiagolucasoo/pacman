@@ -1,15 +1,15 @@
 import time
 import sys
-import utils
+import utilidades
 
 dificuldade_mapa = {"1": "facil", "2": "medio", "3": "dificil"}
 dificuldade_view = {"1": "Fácil", "2": "Médio", "3": "Difícil"}
 
 def Game_Over():
-    return utils.logo("Game Over")
+    return utilidades.logo("Game Over")
 
 def Vitoria():
-    return utils.logo("Vitoria")
+    return utilidades.logo("Vitoria")
 
 def iniciar_jogo():
     print("Hora de começar a jogar!")

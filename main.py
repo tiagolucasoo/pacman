@@ -1,4 +1,4 @@
-import utils as ut
+import utilidades as ut
 import menu
 import game
 
